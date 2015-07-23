@@ -9,12 +9,20 @@ namespace CherrySharp.Internal{
 			_attributes =
 				collectFrom.GetType()
 					.GetMethods()
-					.Where(f => f.CustomAttributes.Any(attr => attr.AttributeType == typeof (ExposeAttribute)))
+					.Where(MethodHasExposeAttribute)
 					.ToArray();
+		}
+
+		private static bool MethodHasExposeAttribute(MethodInfo methodInfo){
+			return methodInfo.CustomAttributes.Any(attr => attr.AttributeType == typeof (ExposeAttribute));
 		}
 
 		public int Count{
 			get { return _attributes.Length; }
+		}
+
+		public MethodInfo this[int index]{
+			get { return _attributes[index]; }
 		}
 	}
 }
