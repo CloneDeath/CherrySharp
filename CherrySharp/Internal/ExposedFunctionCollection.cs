@@ -24,5 +24,9 @@ namespace CherrySharp.Internal{
 		public MethodInfo this[int index]{
 			get { return _attributes[index]; }
 		}
+
+		public MethodInfo GetMethod(string methodName){
+			return _attributes.FirstOrDefault(method => method.Name == methodName);
+		}
 	}
 }

@@ -44,6 +44,9 @@
   <ItemGroup>
     <Compile Include="ExposeAttribute.cs" />
     <Compile Include="Internal\ExposedFunctionCollection.cs" />
+    <Compile Include="Internal\ExposedFunctionServer.cs" />
+    <Compile Include="Internal\UriRequest.cs" />
+    <Compile Include="Internal\WebServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quick.cs" />
   </ItemGroup>

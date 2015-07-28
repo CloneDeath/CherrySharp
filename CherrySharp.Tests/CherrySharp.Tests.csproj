@@ -65,6 +65,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Internal\ExposedFunctionCollectionTests.cs" />
+    <Compile Include="Internal\ExposedFunctionServerTests.cs" />
+    <Compile Include="Internal\UriRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickTests.cs" />
   </ItemGroup>

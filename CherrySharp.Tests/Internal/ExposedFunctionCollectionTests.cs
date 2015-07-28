@@ -34,5 +34,10 @@ namespace CherrySharp.Tests.Internal{
 		public void CollectorProvidesMethodInfo(){
 			_collector[0].Name.Should().Be("Index");
 		}
+
+		[Test]
+		public void CanGetMethodInfoForMethodWithSpecificName(){
+			_collector.GetMethod("Hidden").Should().NotBeNull();
+		}
 	}
 }
