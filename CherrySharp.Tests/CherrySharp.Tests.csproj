@@ -66,6 +66,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ClientSessionCookieTests.cs" />
+    <Compile Include="ExposeChecksForISessionInfoTests.cs" />
     <Compile Include="FullServerHarness.cs" />
     <Compile Include="Internal\ExposedFunctionCollectionTests.cs" />
     <Compile Include="Internal\ExposedFunctionServerTests.cs" />

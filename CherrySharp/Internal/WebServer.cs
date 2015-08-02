@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using CherrySharp.Interfaces;
+using CherrySharp.Internal.Sessions;
 
 namespace CherrySharp.Internal{
 	public abstract class WebServer{
@@ -14,7 +15,7 @@ namespace CherrySharp.Internal{
 			_sessionHandler = new SessionHandler(configuration);
 		}
 
-		protected abstract string OnRequestReceived(string request);
+		protected abstract string OnRequestReceived(Request request);
 
 		public void Start(){
 			_listener = new HttpListener();
@@ -40,8 +41,13 @@ namespace CherrySharp.Internal{
 					response.AppendCookie(cookie);
 				}
 
+				var session = _sessionHandler.GetSession(request.Cookies);
+
+				var body = new StreamReader(request.InputStream).ReadToEnd();
+				var currentRequest = new Request(session, request.RawUrl, body);
+
 				using (var writer = new StreamWriter(response.OutputStream)){
-					var responseBody = OnRequestReceived(request.RawUrl) ?? "";
+					var responseBody = OnRequestReceived(currentRequest) ?? "";
 					writer.Write(responseBody);
 				}
 

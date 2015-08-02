@@ -53,10 +53,14 @@
     <Compile Include="Interfaces\ISessionConfiguration.cs" />
     <Compile Include="Internal\ExposedFunctionCollection.cs" />
     <Compile Include="Internal\ExposedFunctionServer.cs" />
-    <Compile Include="Internal\SessionHandler.cs" />
+    <Compile Include="Internal\Request.cs" />
+    <Compile Include="Internal\Sessions\Session.cs" />
+    <Compile Include="Internal\Sessions\SessionCollection.cs" />
+    <Compile Include="Internal\Sessions\SessionHandler.cs" />
     <Compile Include="Internal\UriParsing\UriParameters.cs" />
     <Compile Include="Internal\UriParsing\UriRequest.cs" />
     <Compile Include="Internal\WebServer.cs" />
+    <Compile Include="ISession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quick.cs" />
   </ItemGroup>

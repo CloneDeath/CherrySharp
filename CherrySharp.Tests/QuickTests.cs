@@ -20,7 +20,8 @@ namespace CherrySharp.Tests{
 			var client = new HttpClient();
 			var response = client.GetAsync(String.Format("http://localhost:{0}/", Quick.Port));
 
-			response.Wait();
+			bool connected = response.Wait(TimeSpan.FromSeconds(2));
+			connected.Should().BeTrue();
 
 			response.Result.StatusCode.Should().Be(HttpStatusCode.OK);
 			var body = response.Result.Content.ReadAsStringAsync();

@@ -12,11 +12,11 @@ namespace CherrySharp.Tests.Internal.Harnesses{
 		}
 
 		protected string GetResponseForRequest(string request){
-			return _server.GetResponseForRequest(request);
+			return GetResponseForRequest(request, "");
 		}
 
 		protected string GetResponseForRequest(string request, string body){
-			return _server.GetResponseForRequest(request, body);
+			return _server.GetResponseForRequest(new Request(null, request, body));
 		}
 	}
 }
