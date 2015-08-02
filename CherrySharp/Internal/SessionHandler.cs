@@ -2,14 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using CherrySharp.Interfaces;
 
-namespace CherrySharp.Internal
-{
-	public class SessionHandler
-	{
+namespace CherrySharp.Internal{
+	public class SessionHandler{
 		private readonly ISessionConfiguration _configuration;
 
 		public SessionHandler(ISessionConfiguration configuration){
@@ -23,11 +19,11 @@ namespace CherrySharp.Internal
 				}
 			}
 
-			return new List<Cookie>(){
+			return new List<Cookie>{
 				new Cookie("sessionid", "1"){
-					Expires = DateTime.Now + _configuration.SessionLifespan,
+					Expires = DateTime.Now + _configuration.SessionLifespan
 				}
 			};
-		} 
+		}
 	}
 }

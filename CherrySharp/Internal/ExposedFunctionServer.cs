@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using CherrySharp.Interfaces;
+using CherrySharp.Internal.UriParsing;
 using Newtonsoft.Json;
 
 namespace CherrySharp.Internal{

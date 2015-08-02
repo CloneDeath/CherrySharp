@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CherrySharp.Internal;
+using CherrySharp.Internal.UriParsing;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -27,7 +28,8 @@ namespace CherrySharp.Tests.Internal{
 		[Test]
 		public void ParametersAreParsed(){
 			var request = new UriRequest("/Info?Name=12");
-			request.Parameters.Should().Contain(new KeyValuePair<string, string>("Name", "12"));
+			request.GetParameter("Name").Should().Be("12");
+			request.GetParameter("wowow").Should().BeNull();
 		}
 
 		[Test]

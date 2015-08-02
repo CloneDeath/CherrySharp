@@ -14,7 +14,6 @@ namespace CherrySharp.Internal{
 			_sessionHandler = new SessionHandler(configuration);
 		}
 
-		public object UserData { get; set; }
 		protected abstract string OnRequestReceived(string request);
 
 		public void Start(){
