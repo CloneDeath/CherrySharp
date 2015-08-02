@@ -1,4 +1,4 @@
-﻿using System;
+﻿using CherrySharp.Interfaces;
 using CherrySharp.Internal;
 
 namespace CherrySharp{
@@ -10,7 +10,11 @@ namespace CherrySharp{
 		}
 
 		public static void Start(object root){
-			_server = new ExposedFunctionServer(root);
+			Start(root, new Configuration());
+		}
+
+		public static void Start(object root, IConfiguration configuration){
+			_server = new ExposedFunctionServer(root, configuration);
 			_server.Start();
 		}
 

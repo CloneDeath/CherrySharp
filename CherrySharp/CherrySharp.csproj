@@ -46,9 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
     <Compile Include="ExposeAttribute.cs" />
+    <Compile Include="Interfaces\IConfiguration.cs" />
+    <Compile Include="Interfaces\IServerConfiguration.cs" />
+    <Compile Include="Interfaces\ISessionConfiguration.cs" />
     <Compile Include="Internal\ExposedFunctionCollection.cs" />
     <Compile Include="Internal\ExposedFunctionServer.cs" />
+    <Compile Include="Internal\SessionHandler.cs" />
     <Compile Include="Internal\UriRequest.cs" />
     <Compile Include="Internal\WebServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using CherrySharp.Interfaces;
 using Newtonsoft.Json;
 
 namespace CherrySharp.Internal{
 	public class ExposedFunctionServer : WebServer{
 		private readonly ExposedFunctionCollection _collection;
 		private readonly object _target;
+		public ExposedFunctionServer(object target) : this(target, new Configuration()){}
 
-		public ExposedFunctionServer(object target){
+		public ExposedFunctionServer(object target, IConfiguration configuration) : base(configuration){
 			_target = target;
 			_collection = new ExposedFunctionCollection(_target);
 		}
@@ -18,7 +20,7 @@ namespace CherrySharp.Internal{
 		}
 
 		public string GetResponseForRequest(string request, string body){
-			UriRequest uri = new UriRequest(request);
+			var uri = new UriRequest(request);
 
 			var invoke = uri.Segments.Last();
 			if (invoke == "") invoke = "Index";
@@ -39,7 +41,7 @@ namespace CherrySharp.Internal{
 			var methodParams = method.GetParameters();
 			var args = new Object[methodParams.Count()];
 
-			for (int i = 0; i < args.Length; i++){
+			for (var i = 0; i < args.Length; i++){
 				var param = methodParams[i];
 
 				var value = uri.GetParameter(param.Name);

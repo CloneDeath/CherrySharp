@@ -1,22 +1,25 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using CherrySharp.Interfaces;
 
 namespace CherrySharp.Internal{
 	public abstract class WebServer{
+		private readonly IServerConfiguration _configuration;
+		private readonly SessionHandler _sessionHandler;
 		private HttpListener _listener;
 
-		protected WebServer(){
-			Port = 8080;
+		protected WebServer(IConfiguration configuration){
+			_configuration = configuration;
+			_sessionHandler = new SessionHandler(configuration);
 		}
 
-		public int Port { get; set; }
 		public object UserData { get; set; }
 		protected abstract string OnRequestReceived(string request);
 
 		public void Start(){
 			_listener = new HttpListener();
-			_listener.Prefixes.Add(String.Format(@"http://+:{0}/", Port));
+			_listener.Prefixes.Add(String.Format(@"{0}://+:{1}/", _configuration.Protocol, _configuration.Port));
 			_listener.Start();
 
 			while (true){
@@ -33,6 +36,10 @@ namespace CherrySharp.Internal{
 
 				response.StatusCode = (int) HttpStatusCode.OK;
 				response.StatusDescription = HttpStatusCode.OK.ToString();
+
+				foreach (var cookie in _sessionHandler.GetCookiesForRequest(request.Cookies)){
+					response.AppendCookie(cookie);
+				}
 
 				using (var writer = new StreamWriter(response.OutputStream)){
 					var responseBody = OnRequestReceived(request.RawUrl) ?? "";

@@ -1,28 +1,22 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using CherrySharp.Tests.Internal.Harnesses;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 
-namespace CherrySharp.Tests.Internal
-{
+namespace CherrySharp.Tests.Internal{
 	[DataContract]
 	public class MyObject{
-
-		[DataMember] public int Score = 0;
-
 		[DataMember] public string Name = "Peter";
+		[DataMember] public int Score;
 	}
 
 	[TestFixture]
-	public class JSonResponse : ServerTestHarness
-	{
+	public class JSonResponse : ServerTestHarness{
 		[Expose]
 		public MyObject GetObject(){
-			return new MyObject(){
+			return new MyObject{
 				Score = 3,
-				Name = "Peter",
+				Name = "Peter"
 			};
 		}
 
@@ -34,12 +28,12 @@ namespace CherrySharp.Tests.Internal
 
 		[Test]
 		public void GetJSon(){
-			GetResponseForRequest("GetObject").Should().Be("{\"Score\":3,\"Name\":\"Peter\"}");
+			GetResponseForRequest("GetObject").Should().Be("{\"Name\":\"Peter\",\"Score\":3}");
 		}
 
 		[Test]
 		public void PutJSonWorks(){
-			GetResponseForRequest("PushJson", "{\"Score\":139,\"Name\":\"Michael\"}")
+			GetResponseForRequest("PushJson", "{\"Score\":139,\"Name\":\"Michael\"}");
 		}
 	}
 }
