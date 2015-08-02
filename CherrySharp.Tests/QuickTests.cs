@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 
 namespace CherrySharp.Tests{
@@ -17,16 +14,8 @@ namespace CherrySharp.Tests{
 
 		[Test]
 		public void IndexReturnsHelloWorld(){
-			var client = new HttpClient();
-			var response = client.GetAsync(String.Format("http://localhost:{0}/", Quick.Port));
-
-			bool connected = response.Wait(TimeSpan.FromSeconds(2));
-			connected.Should().BeTrue();
-
-			response.Result.StatusCode.Should().Be(HttpStatusCode.OK);
-			var body = response.Result.Content.ReadAsStringAsync();
-			body.Wait();
-			body.Result.Should().Be("Hello World");
+			var response = SendRequest("/");
+			response.Body.Should().Be("Hello World");
 		}
 	}
 }
